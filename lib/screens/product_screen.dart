@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_practical/blocs/cart/cart_bloc.dart';
 import 'package:flutter_practical/blocs/products/products_bloc.dart';
 import 'package:flutter_practical/models/product.dart';
 import 'package:flutter_practical/repositories/product_repo.dart';
@@ -77,7 +78,8 @@ class ProductCard extends StatelessWidget {
   final Product product;
   final VoidCallback onCardTapped;
 
-  const ProductCard({super.key, required this.product, required this.onCardTapped});
+  const ProductCard(
+      {super.key, required this.product, required this.onCardTapped});
 
   @override
   Widget build(BuildContext context) {
@@ -126,15 +128,18 @@ class ProductCard extends StatelessWidget {
                 ],
               ),
             ),
-            // Add to Cart Button at the bottom
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
                 width: double.infinity, // Button takes full width
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle the add to cart functionality here
-                    // You can add the product to a cart provider, etc.
+                    // Get the CartBloc and dispatch AddToCartEvent
+                    // Access the CartBloc using BlocProvider.of()
+                    // BlocProvider.of<CartBloc>(context)
+                    //     .add(AddToCartEvent(product: product));
+
+                    // Show a Snackbar message indicating the product is added to the cart
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('${product.title} added to cart')),
                     );
@@ -142,7 +147,7 @@ class ProductCard extends StatelessWidget {
                   child: const Text('Add to Cart'),
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),
